@@ -1,2 +1,2 @@
 # servermanager-spring
- Demo server manager application for Spring
+ Server manager application for Spring
