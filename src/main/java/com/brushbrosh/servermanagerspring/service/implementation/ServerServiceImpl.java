@@ -1,9 +1,5 @@
 package com.brushbrosh.servermanagerspring.service.implementation;
 
-import static java.lang.Boolean.TRUE;
-import static com.brushbrosh.servermanagerspring.enumeration.Status.SERVER_UP;
-import static com.brushbrosh.servermanagerspring.enumeration.Status.SERVER_DOWN;
-
 import java.io.IOException;
 import java.net.InetAddress;
 import java.util.Collection;
@@ -15,6 +11,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.brushbrosh.servermanagerspring.enumeration.Status;
 import com.brushbrosh.servermanagerspring.model.Server;
 import com.brushbrosh.servermanagerspring.repository.ServerRepository;
 import com.brushbrosh.servermanagerspring.service.ServerService;
@@ -42,7 +39,7 @@ public class ServerServiceImpl implements ServerService{
         log.info("Pinging server IP: {}", ipAddress);
         Server server = serverRepository.findByIpAddress(ipAddress);
         InetAddress address = InetAddress.getByName(ipAddress);
-        server.setStatus(address.isReachable(10000) ? SERVER_UP : SERVER_DOWN);
+        server.setStatus(address.isReachable(10000) ? Status.SERVER_UP : Status.SERVER_DOWN);
         serverRepository.save(server);
         return server;
     }
@@ -70,7 +67,7 @@ public class ServerServiceImpl implements ServerService{
     public Boolean delete(Long id) {
         log.info("Deleting server by ID: {}", id);
         serverRepository.deleteById(id);
-        return TRUE;
+        return Boolean.TRUE;
     }
 
     private String setServerImageUrl() {

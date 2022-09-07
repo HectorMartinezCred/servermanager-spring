@@ -1,7 +1,5 @@
 package com.brushbrosh.servermanagerspring.model;
 
-import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
-
 import java.time.LocalDateTime;
 import java.util.Map;
 
@@ -14,7 +12,7 @@ import lombok.experimental.SuperBuilder;
 
 @Data
 @SuperBuilder
-@JsonInclude(NON_NULL)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Response {
     protected LocalDateTime timeStamp;
     protected int statusCode;
